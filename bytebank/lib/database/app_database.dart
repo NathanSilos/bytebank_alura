@@ -8,13 +8,18 @@ Future<Database> createDataBase() {
     final String path = join(dbPath, 'bytebank.db');
 
     // Abre o banco de dados
-    return openDatabase(path, onCreate: (db, version) {
-      // Vai executar a query do sqlite
-      db.execute('CREATE TABLE contacts ('
-          'id NUMBER INTERGER,'
-          'name TEXT, '
-          'account_number INTERGER)');
-    }, version: 1);
+    return openDatabase(
+      path,
+      onCreate: (db, version) {
+        // Vai executar a query do sqlite
+        db.execute('CREATE TABLE contacts ('
+            'id NUMBER INTERGER,'
+            'name TEXT, '
+            'account_number INTERGER)');
+      },
+      version: 1,
+      // limpar banco    onDowngrade: onDatabaseDowngradeDelete,
+    );
   });
 }
 
